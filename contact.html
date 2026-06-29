@@ -123,6 +123,8 @@
               <label for="message">Décrivez votre projet *</label>
               <textarea id="message" name="message" required placeholder="Surface, modèle souhaité, délai, contexte (neuf / rénovation), budget approximatif..."></textarea>
             </div>
+            <!-- Honeypot anti-spam : invisible pour les humains, les bots le remplissent et sont bloqués -->
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <input type="hidden" name="_subject" value="Nouveau devis A2T Distributions">
             <input type="hidden" name="_next" value="https://a2tdistributions.fr/merci.html">
             <button type="submit" class="form__submit">Envoyer ma demande de devis →</button>
