@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Devis gratuit | A2T Distributions – Bretagne & Façade Atlantique</title>
+  <meta name="description" content="Demandez votre devis gratuit pour portes de garage, portes d'entrée, fenêtres, solaire ou borne de recharge. A2T Distributions intervient en Bretagne, Pays de la Loire et façade Atlantique.">
+  <link rel="canonical" href="https://a2tdistributions.fr/contact.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-a">A2T</span>
+        <span class="nav__logo-text">Distributions</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html" class="nav__link">Accueil</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="about.html" class="nav__link">À propos</a></li>
+        <li><a href="contact.html" class="nav__link nav__link--cta active">Devis gratuit</a></li>
+      </ul>
+      <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="container">
+      <span class="page-header__label">Contactez-nous</span>
+      <h1>Devis gratuit &amp; sans engagement</h1>
+      <p>Réponse garantie sous 24h. Nous intervenons en Bretagne, Pays de la Loire et façade Atlantique.</p>
+    </div>
+  </div>
+
+  <section class="form-section">
+    <div class="container">
+      <div class="form-grid">
+        <div class="form-info reveal">
+          <h2>On s'occupe de tout</h2>
+          <p>
+            Remplissez le formulaire et nous vous revenons avec une proposition adaptée à votre projet, votre budget et votre localisation.
+          </p>
+
+          <div class="form-info-item">
+            <div class="form-info-item__icon">⚡</div>
+            <div class="form-info-item__text">
+              <h4>Réponse rapide</h4>
+              <p>Sous 24h en semaine, souvent le jour même</p>
+            </div>
+          </div>
+          <div class="form-info-item">
+            <div class="form-info-item__icon">📍</div>
+            <div class="form-info-item__text">
+              <h4>Déplacement possible</h4>
+              <p>Bretagne, Pays de la Loire, façade Atlantique</p>
+            </div>
+          </div>
+          <div class="form-info-item">
+            <div class="form-info-item__icon">💸</div>
+            <div class="form-info-item__text">
+              <h4>Devis gratuit</h4>
+              <p>Sans engagement, sans frais de visite</p>
+            </div>
+          </div>
+          <div class="form-info-item">
+            <div class="form-info-item__icon">✉️</div>
+            <div class="form-info-item__text">
+              <h4>Email direct</h4>
+              <p><a href="mailto:a2tdistributions@gmail.com" style="color:var(--red);font-weight:600">a2tdistributions@gmail.com</a></p>
+            </div>
+          </div>
+
+          <div style="margin-top:32px;padding:20px;background:var(--red-light);border-radius:12px;border-left:3px solid var(--red)">
+            <p style="font-size:14px;color:var(--dark);line-height:1.6">
+              <strong>Zones couvertes :</strong> Lorient, Vannes, Quimper, Brest, Rennes, Saint-Brieuc, Nantes, Saint-Nazaire, La Rochelle et environs.
+            </p>
+          </div>
+        </div>
+
+        <div class="form-card reveal">
+          <h3>Votre projet en quelques lignes</h3>
+          <!-- Remplacer YOUR_FORM_ID par votre ID Formspree après inscription sur formspree.io -->
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="devisForm">
+            <div class="form__row">
+              <div class="form__group">
+                <label for="prenom">Prénom *</label>
+                <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom">
+              </div>
+              <div class="form__group">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+              </div>
+            </div>
+            <div class="form__group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="votre@email.fr">
+            </div>
+            <div class="form__group">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" name="telephone" placeholder="06 XX XX XX XX">
+            </div>
+            <div class="form__group">
+              <label for="ville">Ville / Département *</label>
+              <input type="text" id="ville" name="ville" required placeholder="Ex : Lorient (56), Nantes (44)...">
+            </div>
+            <div class="form__group">
+              <label for="produit">Type de projet *</label>
+              <select id="produit" name="produit" required>
+                <option value="">-- Sélectionnez --</option>
+                <option value="porte-garage">Porte de garage</option>
+                <option value="porte-entree">Porte d'entrée (Pirnar)</option>
+                <option value="fenetres">Fenêtres / Baies vitrées</option>
+                <option value="solaire">Panneaux solaires</option>
+                <option value="borne-ev">Borne de recharge EV (IRVE)</option>
+                <option value="multiple">Projet combiné</option>
+                <option value="autre">Autre / Question</option>
+              </select>
+            </div>
+            <div class="form__group">
+              <label for="message">Décrivez votre projet *</label>
+              <textarea id="message" name="message" required placeholder="Surface, modèle souhaité, délai, contexte (neuf / rénovation), budget approximatif..."></textarea>
+            </div>
+            <input type="hidden" name="_subject" value="Nouveau devis A2T Distributions">
+            <input type="hidden" name="_next" value="https://a2tdistributions.fr/merci.html">
+            <button type="submit" class="form__submit">Envoyer ma demande de devis →</button>
+            <p class="form__notice">Vos données sont utilisées uniquement pour traiter votre demande. Voir nos <a href="legal.html">mentions légales</a>.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <div class="footer__logo"><span class="nav__logo-a">A2T</span> Distributions</div>
+        <p>Spécialiste portes, fenêtres, solaire et bornes de recharge en Bretagne et façade Atlantique.</p>
+        <p class="footer__siren">SIREN 853547115</p>
+      </div>
+      <div class="footer__col"><h4>Navigation</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="services.html">Services</a></li><li><a href="about.html">À propos</a></li><li><a href="contact.html">Contact & Devis</a></li><li><a href="legal.html">Mentions légales</a></li></ul></div>
+      <div class="footer__col"><h4>Nos gammes</h4><ul><li><a href="services.html#portes-garage">Portes de garage</a></li><li><a href="services.html#portes-entree">Portes d'entrée</a></li><li><a href="services.html#fenetres">Fenêtres & Baies</a></li><li><a href="services.html#solaire">Panneaux solaires</a></li><li><a href="services.html#bornes-ev">Bornes de recharge EV</a></li></ul></div>
+      <div class="footer__col"><h4>Zones desservies</h4><ul><li>Lorient · Vannes · Quimper</li><li>Brest · Rennes · Saint-Brieuc</li><li>Nantes · Saint-Nazaire</li><li>La Rochelle & alentours</li></ul></div>
+    </div>
+    <div class="footer__bottom"><div class="container"><p>&copy; 2026 A2T Distributions — <a href="legal.html">Mentions légales</a></p></div></div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
