@@ -173,6 +173,15 @@ ul { list-style: none; }
   font-weight: 700;
   color: var(--white);
 }
+.nav__logo img {
+  height: 48px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: filter var(--transition);
+}
+.nav.scrolled .nav__logo img {
+  filter: brightness(0) invert(1);
+}
 .nav__logo-a {
   background: var(--red);
   color: var(--white);
@@ -936,6 +945,100 @@ ul { list-style: none; }
 }
 .legal-content ul { padding-left: 20px; list-style: disc; }
 .legal-content strong { color: var(--dark); }
+
+/* ============================================================
+   AVIS GOOGLE — MARQUEE INFINI
+   ============================================================ */
+.reviews { background: var(--dark); padding: 80px 0; overflow: hidden; }
+.reviews .section__title { color: var(--white); }
+.reviews .section__label { color: var(--gold); }
+.reviews__global {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.reviews__stars { color: #fbbf24; font-size: 28px; letter-spacing: 2px; }
+.reviews__score { font-size: 48px; font-weight: 900; color: var(--white); line-height: 1; }
+.reviews__meta { text-align: left; }
+.reviews__meta p { font-size: 14px; color: rgba(255,255,255,.5); }
+.reviews__meta strong { font-size: 16px; color: rgba(255,255,255,.8); }
+.reviews__google-logo {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.4);
+  margin-left: 8px;
+}
+
+.marquee-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+.marquee-wrap::before,
+.marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-wrap::before { left: 0; background: linear-gradient(to right, var(--dark), transparent); }
+.marquee-wrap::after  { right: 0; background: linear-gradient(to left, var(--dark), transparent); }
+
+.marquee {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marqueeLeft 40s linear infinite;
+}
+.marquee--right {
+  animation: marqueeRight 40s linear infinite;
+}
+.marquee:hover, .marquee--right:hover { animation-play-state: paused; }
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.review-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 300px;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+.review-card:hover { background: rgba(255,255,255,.1); }
+.review-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.review-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.review-card__name { font-size: 14px; font-weight: 700; color: var(--white); }
+.review-card__date { font-size: 12px; color: rgba(255,255,255,.4); }
+.review-card__stars { color: #fbbf24; font-size: 14px; margin-bottom: 10px; }
+.review-card__text { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.6; }
 
 /* ============================================================
    RESPONSIVE
