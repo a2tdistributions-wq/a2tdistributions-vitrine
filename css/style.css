@@ -851,6 +851,13 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
 }
+.service-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+}
 .service-visual::after {
   content: '';
   position: absolute;
