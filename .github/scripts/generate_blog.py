@@ -100,6 +100,12 @@ INSTRUCTIONS STRICTES :
 
     article_content = message.content[0].text
 
+    # Nettoyer les balises markdown code block si Claude en a ajouté
+    import re as _re
+    article_content = _re.sub(r'^```(?:html)?\s*', '', article_content.strip(), flags=_re.MULTILINE)
+    article_content = _re.sub(r'\s*```$', '', article_content.strip(), flags=_re.MULTILINE)
+    article_content = article_content.strip()
+
     # Wrap dans le template complet
     html = f"""<!DOCTYPE html>
 <html lang="fr">
