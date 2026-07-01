@@ -1,0 +1,39 @@
+name: Blog mensuel auto A2T
+
+on:
+  schedule:
+    # Le 1er de chaque mois à 9h00 UTC
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    # Permet de lancer manuellement depuis GitHub Actions
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Anthropic SDK
+        run: pip install anthropic
+
+      - name: Generate blog article
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python .github/scripts/generate_blog.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "A2T Blog Bot"
+          git config user.email "contact@a2tdistributions.fr"
+          git add blog/ assets/
+          git diff --staged --quiet || git commit -m "Blog auto $(date '+%B %Y') — article mensuel A2T"
+          git push
