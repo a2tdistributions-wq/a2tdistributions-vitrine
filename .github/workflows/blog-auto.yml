@@ -1,9 +1,9 @@
-name: Blog mensuel auto A2T
+name: Blog hebdomadaire auto A2T
 
 on:
   schedule:
-    # Le 1er de chaque mois à 9h00 UTC
-    - cron: '0 9 1 * *'
+    # Chaque lundi à 9h00 UTC
+    - cron: '0 9 * * 1'
   workflow_dispatch:
     # Permet de lancer manuellement depuis GitHub Actions
 
@@ -35,5 +35,5 @@ jobs:
           git config user.name "A2T Blog Bot"
           git config user.email "contact@a2tdistributions.fr"
           git add blog/ assets/
-          git diff --staged --quiet || git commit -m "Blog auto $(date '+%B %Y') — article mensuel A2T"
+          git diff --staged --quiet || git commit -m "Blog auto $(date '+%d %B %Y') — article hebdomadaire A2T"
           git push

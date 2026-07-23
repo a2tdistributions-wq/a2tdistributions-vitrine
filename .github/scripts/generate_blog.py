@@ -1,55 +1,69 @@
 #!/usr/bin/env python3
 """
-A2T Distributions — Générateur automatique d'articles de blog mensuels
-Appelle Claude API pour produire un article HTML complet, l'écrit dans blog/,
-et met à jour blog/index.html.
+A2T Distributions — Générateur automatique d'articles de blog hebdomadaires.
+Appelle Claude API pour choisir un nouveau sujet (en évitant les sujets déjà publiés),
+produire un article HTML complet, l'écrire dans blog/, et met à jour blog/index.html.
 """
 
 import anthropic
 import os
+import random
 import re
 from datetime import datetime
 
-# Planning des sujets par mois
-TOPICS = {
-    1:  ("Double vitrage ou triple vitrage : lequel choisir en Bretagne ?",
-         "double-vs-triple-vitrage-bretagne", "Fenêtres & Baies", ""),
-    2:  ("Baie vitrée coulissante ou galandage : avantages et prix 2027",
-         "baie-vitree-coulissante-galandage-bretagne", "Fenêtres & Baies", ""),
-    3:  ("Porte d'entrée : combien ça coûte vraiment ? (guide prix 2027)",
-         "porte-entree-prix-guide-2027", "Portes d'entrée", ""),
-    4:  ("Sécurité porte d'entrée : RC2, A2P, multipoints — ce qu'il faut savoir",
-         "securite-porte-entree-rc2-a2p-bretagne", "Portes d'entrée", ""),
-    5:  ("Volets roulants aluminium en Bretagne : prix et installation 2027",
-         "volets-roulants-aluminium-bretagne-2027", "Fenêtres & Baies", ""),
-    6:  ("Rénovation menuiserie : par où commencer et comment la financer",
-         "renovation-menuiserie-bretagne-guide", "Conseils", ""),
-    7:  ("Double vitrage ou triple vitrage : lequel choisir en Bretagne ?",
-         "double-vs-triple-vitrage-bretagne", "Fenêtres & Baies", ""),
-    8:  ("Portail aluminium sur-mesure : tendances et prix 2027",
-         "portail-aluminium-sur-mesure-bretagne-2027", "Menuiseries", ""),
-    9:  ("Porte d'entrée aluminium ou PVC : que choisir en 2027 ?",
-         "porte-entree-aluminium-vs-pvc-2027", "Portes d'entrée", ""),
-    10: ("Porte de garage motorisée : guide complet 2027",
-         "porte-garage-motorisee-guide-2027", "Portes de garage", ""),
-    11: ("Isolation thermique RE2020 : fenêtres et baies en Bretagne",
-         "isolation-thermique-re2020-fenetres-bretagne", "Fenêtres & Baies", ""),
-    12: ("Hörmann LPU 67 vs LPU 42 : quelle porte de garage choisir ?",
-         "hormann-lpu-67-vs-lpu-42-comparatif", "Portes de garage", ""),
-}
-
 MOIS_FR = {
-    1:"Janvier", 2:"Février", 3:"Mars", 4:"Avril", 5:"Mai", 6:"Juin",
-    7:"Juillet", 8:"Août", 9:"Septembre", 10:"Octobre", 11:"Novembre", 12:"Décembre"
+    1: "Janvier", 2: "Février", 3: "Mars", 4: "Avril", 5: "Mai", 6: "Juin",
+    7: "Juillet", 8: "Août", 9: "Septembre", 10: "Octobre", 11: "Novembre", 12: "Décembre"
 }
 
-# Choisir une image hero existante selon la catégorie
+CATEGORIES = [
+    "Portes de garage", "Portes d'entrée", "Fenêtres & Baies",
+    "Menuiseries", "Conseils", "Solaire", "Bornes de recharge", "Panneaux habitat",
+]
+
+# Catégories qui reçoivent le badge vert dans blog/index.html (les autres restent rouge)
+GREEN_CATEGORIES = ("Fenêtres & Baies", "Menuiseries", "Conseils", "Solaire", "Bornes de recharge")
+
+# Plusieurs images possibles par catégorie (choisies au hasard pour varier les visuels)
 CATEGORY_IMAGES = {
-    "Portes de garage": "sectionnelle-noire-lorient-morbihan.jpg",
-    "Portes d'entrée":  "pirnar-q10-anthracite-lanester.jpg",
-    "Fenêtres & Baies": "fenetres-alu-chantier-hennebont.jpg",
-    "Menuiseries":      "batiment-a2t-distributions-exterieur.jpg",
-    "Conseils":         "showroom-a2t-catalogues-tehni-pirnar.jpg",
+    "Portes de garage": [
+        "sectionnelle-noire-lorient-morbihan.jpg", "hormann-sectionnelle-hublots-morbihan.jpg",
+        "hormann-double-sectionnelle-portillon.jpg", "double-garage-sectionnelle-ploeumeur.jpg",
+        "double-sectionnelle-garage-morbihan.jpg", "double-sectionnelle-wenge-villa-blanche.jpg",
+        "sectionnelle-anthracite-hublots-auray.jpg", "sectionnelle-anthracite-plouay-morbihan.jpg",
+        "sectionnelle-blanche-maison-neuve.jpg", "sectionnelle-bois-chantier-morbihan.jpg",
+        "sectionnelle-bois-mur-pierre-bretagne.jpg", "sectionnelle-brun-maison-bretagne.jpg",
+        "sectionnelle-corten-villa-moderne.jpg", "porte-garage-alu-vitree-bretagne.jpg",
+    ],
+    "Portes d'entrée": [
+        "pirnar-q10-anthracite-lanester.jpg", "pirnar-quantum-q10-showroom.jpg",
+        "porte-entree-blanche-vitree-granite.jpg", "porte-entree-bois-mur-pierre-bretagne.jpg",
+        "porte-pivot-bois-a2t-morbihan.jpg", "porte-pivot-tehni-larmor-plage.jpg",
+        "pose-porte-pivot-equipe-a2t.jpg", "chantier-porte-entree-garage-lorient.jpg",
+    ],
+    "Fenêtres & Baies": [
+        "fenetres-alu-chantier-hennebont.jpg", "fenetres-pvc-blanc-maison-granite.jpg",
+        "baies-vitrees-noires-briques-terreal.jpg",
+    ],
+    "Menuiseries": [
+        "batiment-a2t-distributions-exterieur.jpg", "devanture-a2t-distributions-cleguer.jpg",
+        "depot-a2t-distributions-facade-cleguer.jpg", "porte-aluminium-batiment-pierre-bretagne.jpg",
+        "camionnette-livraison-porte-a2t.jpg", "realisation-porte-bois-fenetres-noires.jpg",
+        "pergola-aluminium-bioclimatique-bretagne.jpg",
+    ],
+    "Conseils": [
+        "showroom-a2t-catalogues-tehni-pirnar.jpg", "showroom-a2t-pirnar-eclaire.jpg",
+        "showroom-a2t-porte-tehni-bois.jpg", "showroom-a2t-tehni-pirnar-table-conseil.jpg",
+        "showroom-a2t-vue-ensemble.jpg", "chantier-complet-maison-bretagne.jpg",
+        "chantier-maison-contemporaine-a2t.jpg",
+    ],
+    "Solaire": ["panneaux-solaires-toit-ardoise-bretagne.jpg"],
+    "Bornes de recharge": [
+        "borne-recharge-v2c-installation-garage.jpg", "borne-recharge-v2c-wallbox-bretagne.jpg",
+    ],
+    "Panneaux habitat": [
+        "chantier-complet-maison-bretagne.jpg", "batiment-a2t-distributions-exterieur.jpg",
+    ],
 }
 
 SYSTEM_PROMPT = """Tu es un rédacteur SEO expert en menuiseries, habitat et énergie en Bretagne,
@@ -62,8 +76,57 @@ A2T Distributions :
 - Fenêtres & baies vitrées aluminium
 - Panneaux solaires photovoltaïques
 - Bornes de recharge EV IRVE
+- Panneaux habitat sur mesure (pros, hôtels, campings, collectivités) — réseau national de distributeurs en développement
 - Zone : Bretagne, Morbihan, Finistère, Ille-et-Vilaine, Loire-Atlantique
 - SIREN 853547115 — contact@a2tdistributions.fr — Cléguér (56620)"""
+
+
+def get_used_titles_and_slugs():
+    """Lit les articles déjà publiés pour ne jamais répéter un sujet."""
+    slugs = set()
+    if os.path.isdir("blog"):
+        for f in os.listdir("blog"):
+            if f.endswith(".html") and f != "index.html":
+                slugs.add(f[:-5])
+    titles = []
+    index_path = "blog/index.html"
+    if os.path.exists(index_path):
+        with open(index_path, encoding="utf-8") as f:
+            content = f.read()
+        titles = re.findall(r'<h2><a href="[^"]+">([^<]+)</a></h2>', content)
+    return slugs, titles
+
+
+def pick_topic(client, used_titles):
+    """Demande à Claude un nouveau sujet d'article, distinct de ceux déjà publiés."""
+    used_list = "\n".join(f"- {t}" for t in used_titles) or "(aucun article publié pour l'instant)"
+    prompt = f"""Propose UN nouveau sujet d'article de blog SEO pour A2T Distributions
+(menuiserie/habitat en Bretagne). Le sujet doit être utile, concret, cibler une vraie
+requête de recherche locale (prix, comparatif, guide, sécurité, aide financière...).
+
+Catégories possibles (choisis-en UNE exactement, orthographe identique) :
+{", ".join(CATEGORIES)}
+
+Sujets déjà publiés — NE PAS répéter ni reformuler légèrement l'un d'entre eux :
+{used_list}
+
+Réponds STRICTEMENT sous cette forme, 3 lignes, rien d'autre :
+TITRE: <titre accrocheur et précis>
+SLUG: <slug-en-minuscules-sans-accents-separe-par-des-tirets>
+CATEGORIE: <une des catégories listées ci-dessus>"""
+
+    resp = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=300,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    text = resp.content[0].text
+    titre = re.search(r"TITRE:\s*(.+)", text).group(1).strip()
+    slug = re.search(r"SLUG:\s*(.+)", text).group(1).strip()
+    categorie = re.search(r"CATEGORIE:\s*(.+)", text).group(1).strip()
+    if categorie not in CATEGORIES:
+        categorie = "Conseils"
+    return titre, slug, categorie
 
 
 def generate_html(titre, slug, categorie, mois_fr, annee, image_hero):
@@ -218,11 +281,7 @@ def update_blog_index(titre, slug, categorie, mois_fr, annee, image_hero):
     with open(index_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Couleur de badge selon catégorie
-    cat_class = ""
-    if categorie in ("Fenêtres & Baies", "Menuiseries", "Conseils"):
-        cat_class = ' blog-card__cat--green'
-
+    cat_class = ' blog-card__cat--green' if categorie in GREEN_CATEGORIES else ""
     new_card = f"""
         <article class="blog-card reveal">
           <a href="{slug}.html">
@@ -239,7 +298,6 @@ def update_blog_index(titre, slug, categorie, mois_fr, annee, image_hero):
           </div>
         </article>
 """
-    # Insère après l'ouverture de la grille
     content = content.replace('<div class="blog-grid">\n', f'<div class="blog-grid">\n{new_card}', 1)
 
     with open(index_path, "w", encoding="utf-8") as f:
@@ -249,20 +307,24 @@ def update_blog_index(titre, slug, categorie, mois_fr, annee, image_hero):
 
 def main():
     now = datetime.now()
-    month = now.month
     annee = now.year
-    mois_fr = MOIS_FR[month]
+    mois_fr = MOIS_FR[now.month]
 
-    titre, slug, categorie, _ = TOPICS[month]
-    image_hero = CATEGORY_IMAGES.get(categorie, "showroom-a2t-catalogues-tehni-pirnar.jpg")
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    used_slugs, used_titles = get_used_titles_and_slugs()
 
-    # Vérifier si l'article existe déjà
+    titre, slug, categorie = pick_topic(client, used_titles)
+
+    # Sécurité anti-collision si jamais le slug proposé existe déjà
+    if slug in used_slugs:
+        slug = f"{slug}-{now.strftime('%Y%m%d')}"
+
+    images = CATEGORY_IMAGES.get(categorie, CATEGORY_IMAGES["Conseils"])
+    image_hero = random.choice(images)
+
+    print(f"Sujet choisi : {titre} ({categorie})")
+
     filepath = f"blog/{slug}.html"
-    if os.path.exists(filepath):
-        print(f"Article {filepath} déjà existant — skip.")
-        return
-
-    print(f"Génération : {titre}")
     html = generate_html(titre, slug, categorie, mois_fr, annee, image_hero)
 
     with open(filepath, "w", encoding="utf-8") as f:
