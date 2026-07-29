@@ -45,3 +45,5 @@ Zones ciblées dans le structured data et le contenu :
 - Bretagne : Lorient, Vannes, Quimper, Brest, Rennes, Saint-Brieuc
 - Pays de la Loire : Nantes, Saint-Nazaire, La Baule, Angers
 - Façade Atlantique : La Rochelle, Cholet, Laval
+
+<!-- redeploy trigger 2026-07-29 -->
