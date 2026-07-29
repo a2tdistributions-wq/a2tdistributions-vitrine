@@ -136,7 +136,7 @@ def generate_html(titre, slug, categorie, mois_fr, annee, image_hero):
 
 INSTRUCTIONS STRICTES :
 
-1. Produis UNIQUEMENT le HTML entre les balises <article> et </article> (le contenu de l'article uniquement, pas la page entière — je l'insère moi-même dans le template).
+1. Produis UNIQUEMENT le contenu intérieur de l'article (pas la page entière — je l'insère moi-même dans le template). N'inclus JAMAIS toi-même les balises <article> ou </article> : je les ajoute automatiquement autour de ce que tu produis, donc si tu les ajoutes aussi elles seraient dupliquées et casseraient la mise en page.
 
 2. Structure requise dans l'article :
    - <div class="article-meta"> avec <span class="article-meta__cat">{categorie}</span>, "Par A2T Distributions · Bretagne", "{mois_fr} {annee} · X min de lecture"
@@ -152,7 +152,7 @@ INSTRUCTIONS STRICTES :
 
 4. Données : utilise des fourchettes de prix réalistes pour la France en {annee}. Pas de chiffres inventés précis.
 
-5. NE génère PAS les balises html/head/body/nav/footer — juste le contenu <article>...</article>."""
+5. NE génère PAS les balises html/head/body/nav/footer, ni <article>/</article> (voir point 1) — juste le contenu intérieur."""
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
@@ -167,6 +167,13 @@ INSTRUCTIONS STRICTES :
     import re as _re
     article_content = _re.sub(r'^```(?:html)?\s*', '', article_content.strip(), flags=_re.MULTILINE)
     article_content = _re.sub(r'\s*```$', '', article_content.strip(), flags=_re.MULTILINE)
+    article_content = article_content.strip()
+
+    # Filet de sécurité : si Claude a quand même inclus <article>...</article>
+    # malgré la consigne, on les retire ici pour ne jamais dupliquer la balise
+    # (le template ci-dessous ajoute toujours son propre <article class="article-content">).
+    article_content = _re.sub(r'^<article[^>]*>\s*', '', article_content)
+    article_content = _re.sub(r'\s*</article>\s*$', '', article_content)
     article_content = article_content.strip()
 
     # Wrap dans le template complet
@@ -217,7 +224,9 @@ INSTRUCTIONS STRICTES :
   <div class="container">
     <div class="article-wrap">
 
+      <article class="article-content">
       {article_content}
+      </article>
 
       <aside class="article-sidebar">
         <div class="sidebar-cta">
