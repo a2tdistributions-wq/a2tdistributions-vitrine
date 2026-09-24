@@ -184,7 +184,7 @@ INSTRUCTIONS STRICTES :
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{titre} | A2T Distributions Bretagne</title>
   <meta name="description" content="{titre} — Guide complet par A2T Distributions, spécialiste menuiseries en Bretagne et Morbihan.">
-  <link rel="canonical" href="https://a2tdistributions.fr/blog/{slug}.html">
+  <link rel="canonical" href="https://www.a2tdistributions.fr/blog/{slug}.html">
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",

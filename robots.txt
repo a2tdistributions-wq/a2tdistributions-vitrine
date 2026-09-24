@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /merci.html
 
-Sitemap: https://a2tdistributions.fr/sitemap.xml
+Sitemap: https://www.a2tdistributions.fr/sitemap.xml
