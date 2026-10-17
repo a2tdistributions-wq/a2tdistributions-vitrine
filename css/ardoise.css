@@ -214,3 +214,19 @@ h1,h2,h3,.section__title,.page-header h1{font-family:var(--ar-display);font-weig
   .ar-hero h1{font-size:44px}
   .ar-lead{font-size:16.5px}
 }
+
+/* Téléphone (17/10) : logo compact (Android impose une taille mini au texte font-size:0), coches alignées, boutons pleine largeur */
+.nav__logo,.footer__logo{gap:0!important}
+.nav__logo-t{display:none!important}
+.service-block ul li{padding:10px 0 10px 26px!important;line-height:1.55}
+.service-block ul li::before{top:10px!important;line-height:1.55;font-size:15px}
+.service-block .btn+.btn{margin-top:10px}
+.btn--gold{background:var(--ar-accent)!important;border-color:var(--ar-accent)!important;color:var(--ar-accent-ink)!important}
+.service-block .btn--gold{background:transparent!important;border:1.5px solid var(--ar-accent)!important;color:#1e2326!important}
+@media (max-width:600px){
+  .nav__inner{height:60px}
+  .nav__logo::before{font-size:24px}
+  .nav__logo::after{font-size:8px;margin-top:3px}
+  .service-block .btn,.cta-section .btn{display:flex!important;width:100%;justify-content:center;margin-right:0!important;text-align:center}
+  .service-block ul li{font-size:15.5px}
+}
