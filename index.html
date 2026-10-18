@@ -165,7 +165,7 @@
       <div class="ar-ctas"><a class="ar-btn ar-main" href="https://a2tdistributions.com/107-fenetres-aluminium-a-frappe-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-fenetres-3d">Configurer ma fenêtre</a></div>
     </div>
     <div class="ar-d3-video reveal">
-      <video src="assets/media/fenetre-alu-3d.mp4" poster="assets/media/fenetre-alu-3d.jpg" autoplay muted loop playsinline preload="none" aria-label="Fenêtre aluminium oscillo-battante en 3D, volet roulant qui descend et remonte"></video>
+      <video class="ar-fen-video" src="assets/media/fenetre-alu-laiton.mp4" poster="assets/media/fenetre-alu-laiton.jpg" autoplay muted loop playsinline preload="none" aria-label="Fenêtre aluminium oscillo-battante en 3D, volet roulant qui descend et remonte"></video>
       <span class="ar-badge">Nouveau · 3D</span><span class="ar-tag">Fenêtre alu · oscillo-battant · volet intégré</span>
     </div>
   </div></section>
@@ -289,7 +289,11 @@
 document.querySelectorAll('.ar-ral button').forEach(function(b){b.addEventListener('click',function(){
   var r=document.documentElement.style;r.setProperty('--ar-accent',b.dataset.ral);r.setProperty('--ar-accent-ink',b.dataset.ink);
   document.querySelectorAll('.ar-ral button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
-  document.querySelector('.ar-raln').textContent=b.dataset.n;});});
+  document.querySelector('.ar-raln').textContent=b.dataset.n;
+  /* 18/10/2026 : la fenêtre 3D prend la couleur de la pastille (une vidéo par pastille, même ordre que les boutons) */
+  var noms=['laiton','chene','rouge','ivoire','vert','blanc'],i=Array.prototype.indexOf.call(document.querySelectorAll('.ar-ral button'),b),v=document.querySelector('.ar-fen-video');
+  if(v&&noms[i]){v.setAttribute('poster','assets/media/fenetre-alu-'+noms[i]+'.jpg');v.setAttribute('src','assets/media/fenetre-alu-'+noms[i]+'.mp4');var p=v.play();if(p&&p.catch)p.catch(function(){});}
+});});
 </script>
 </body>
 </html>
