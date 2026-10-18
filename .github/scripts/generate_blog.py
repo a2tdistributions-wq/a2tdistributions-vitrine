@@ -181,6 +181,11 @@ INSTRUCTIONS STRICTES :
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <meta property="og:image" content="https://www.a2tdistributions.fr/assets/images/{image_hero}">
+  <meta name="twitter:image" content="https://www.a2tdistributions.fr/assets/images/{image_hero}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{titre} | A2T Distributions Bretagne</title>
   <meta name="description" content="{titre} — Guide complet par A2T Distributions, spécialiste menuiseries en Bretagne et Morbihan.">
