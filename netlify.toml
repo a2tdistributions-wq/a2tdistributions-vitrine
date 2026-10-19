@@ -1,0 +1,4 @@
+# 19/10/2026 : le site .fr est servi par Cloudflare Pages ; Netlify ne doit plus rien construire
+# (chaque build consommait des crédits). « exit 0 » = Netlify annule le build sans déployer.
+[build]
+  ignore = "exit 0"
