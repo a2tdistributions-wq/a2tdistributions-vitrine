@@ -98,8 +98,8 @@ h1,h2,h3,.section__title,.page-header h1{font-family:var(--ar-display);font-weig
 .ar-ral button{width:26px;height:26px;border-radius:999px;border:2px solid rgba(255,255,255,.35);cursor:pointer;padding:0;transition:transform .2s,border-color .2s}
 .ar-ral button[aria-pressed="true"]{border-color:#fff;transform:scale(1.15)}
 .ar-raln{font-family:var(--ar-mono);font-size:12px;color:#cfd3d1;margin-left:6px}
-.ar-scroll{position:absolute;left:50%;bottom:18px;width:1px;height:44px;background:linear-gradient(var(--ar-accent),transparent);animation:arDescend 2.2s ease-in-out infinite}
-@keyframes arDescend{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.ar-scroll{position:absolute;left:50%;bottom:18px;width:1px;height:44px;background:linear-gradient(var(--ar-accent),transparent);animation:arDescend 2.2s ease-in-out infinite;transform-origin:top;will-change:transform}
+@keyframes arDescend{0%{transform:translateY(0) scaleY(0)}50%{transform:translateY(0) scaleY(1)}100%{transform:translateY(100%) scaleY(0)}}
 
 /* Chiffres */
 .ar-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--ar-line)}
@@ -164,7 +164,8 @@ h1,h2,h3,.section__title,.page-header h1{font-family:var(--ar-display);font-weig
 .ar-note{font-family:var(--ar-display);font-size:84px;line-height:.9}
 .ar-etoiles{color:var(--ar-accent);font-size:22px;letter-spacing:3px}
 .ar-marquee{overflow:hidden;margin-top:40px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.ar-track{display:flex;gap:16px;width:max-content;animation:arDefile 60s linear infinite}
+.ar-track{display:flex;gap:16px;width:max-content;animation:arDefile 60s linear infinite;will-change:transform}
+.ar-marquee.ar-pause .ar-track{animation-play-state:paused}
 .ar-marquee:hover .ar-track{animation-play-state:paused}
 .ar-track--inv{animation-direction:reverse;animation-duration:70s}
 @keyframes arDefile{to{transform:translateX(-50%)}}
@@ -230,3 +231,7 @@ h1,h2,h3,.section__title,.page-header h1{font-family:var(--ar-display);font-weig
   .service-block .btn,.cta-section .btn{display:flex!important;width:100%;justify-content:center;margin-right:0!important;text-align:center}
   .service-block ul li{font-size:15.5px}
 }
+
+/* 29/10/2026 : pied de page plus lisible (contraste AA) */
+.footer__siren{opacity:1!important;color:#9ea3a6}
+.footer__bottom,.footer__bottom p{color:#9ea3a6!important}

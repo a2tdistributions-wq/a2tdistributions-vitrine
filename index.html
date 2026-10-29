@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
   <meta name="msvalidate.01" content="31463A403DC7300A91021D4E9C6B0B07">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A2T Distributions | Portes de garage, portes d’entrée & fenêtres à Lorient – showroom Cléguer</title>
+  <title>Portes de garage, d’entrée, fenêtres à Lorient | A2T Distributions</title>
   <meta name="description" content="Portes de garage Hörmann, portes d’entrée Pirnar et Tehni, fenêtres et volets près de Lorient. Showroom à Cléguer, configurateurs 3D et prix TTC en ligne.">
   <meta name="keywords" content="portes garage Lorient, Hörmann Lorient, Flexidoor Bretagne, portes entrée Lorient, portes pivot Bretagne, Pirnar Bretagne, Tehni portes entrée, fenêtres Vannes, solaire Bretagne, bornes recharge Nantes, A2T Distributions Lanester">
   <meta name="robots" content="index, follow">
@@ -95,7 +95,7 @@
 
   <section class="ar-hero">
     <img class="ar-poster" src="assets/media/maison-porte-garage.jpg" alt="">
-    <video src="assets/media/maison-porte-garage.mp4" poster="assets/media/maison-porte-garage.jpg" autoplay muted loop playsinline preload="auto" aria-label="Maison contemporaine au crépuscule : la porte de garage sectionnelle s’ouvre puis se referme"></video>
+    <video data-src="assets/media/maison-porte-garage.mp4" poster="assets/media/maison-porte-garage.jpg" muted loop playsinline preload="none" aria-label="Maison contemporaine au crépuscule : la porte de garage sectionnelle s’ouvre puis se referme"></video>
     <span class="ar-tag">Sectionnelle Hörmann · gris anthracite · sur mesure</span>
     <div class="ar-hero-copy">
       <span class="ar-eyebrow">Lorient · Cléguer · Morbihan · Bretagne</span>
@@ -194,7 +194,7 @@
 
   <section class="ar-blk ar-surface"><div class="ar-wrap ar-d3">
     <div class="ar-d3-video reveal">
-      <video src="assets/media/porte-pivot-3d.mp4" poster="assets/media/porte-pivot-3d.jpg" autoplay muted loop playsinline preload="none" aria-label="Porte pivot aspect corten qui s’ouvre en 3D"></video>
+      <video src="assets/media/porte-pivot-3d.mp4" poster="assets/media/porte-pivot-3d.jpg" data-auto muted loop playsinline preload="none" aria-label="Porte pivot aspect corten qui s’ouvre en 3D"></video>
       <span class="ar-badge">Nouveau · 3D</span><span class="ar-tag">Porte pivot Tehni · aspect corten</span>
     </div>
     <div class="reveal">
@@ -221,7 +221,7 @@
       <div class="ar-ctas"><a class="ar-btn ar-main" href="https://a2tdistributions.com/107-fenetres-aluminium-a-frappe-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-fenetres-3d">Configurer ma fenêtre</a> <a class="ar-btn" href="https://a2tdistributions.com/132-portes-fenetres-aluminium-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-portes-fenetres">Nouveau : porte-fenêtre</a> <a class="ar-btn" href="https://a2tdistributions.com/139-baies-coulissantes-aluminium-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-coulissants">Baies coulissantes</a> <a class="ar-btn" href="https://a2tdistributions.com/163-baies-coulissantes-pvc-alu-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-baies-pvc-alu">Nouveau : baies PVC-alu</a> <a class="ar-btn" href="https://a2tdistributions.com/161-fenetres-pvc-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-fenetres-pvc">Fenêtres PVC</a> <a class="ar-btn" href="https://a2tdistributions.com/153-fenetres-pvc-blanches-iglo-5?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-fenetres-drutex">Nouveau : fenêtres PVC Drutex tout compris</a> <a class="ar-btn" href="https://a2tdistributions.com/155-portes-entree-pvc-mixte-alu-sur-mesure?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=accueil-portes-entree-sur-mesure">Nouveau : 38 portes d’entrée sur mesure</a></div>
     </div>
     <div class="ar-d3-video reveal">
-      <video class="ar-fen-video" src="assets/media/fenetre-alu-laiton.mp4" poster="assets/media/fenetre-alu-laiton.jpg" autoplay muted loop playsinline preload="none" aria-label="Fenêtre aluminium oscillo-battante en 3D, volet roulant qui descend et remonte"></video>
+      <video class="ar-fen-video" src="assets/media/fenetre-alu-laiton.mp4" poster="assets/media/fenetre-alu-laiton.jpg" data-auto muted loop playsinline preload="none" aria-label="Fenêtre aluminium oscillo-battante en 3D, volet roulant qui descend et remonte"></video>
       <span class="ar-badge">Nouveau · 3D</span><span class="ar-tag">Fenêtre alu · oscillo-battant · volet intégré</span>
     </div>
   </div></section>
@@ -365,6 +365,27 @@ document.querySelectorAll('.ar-ral button').forEach(function(b){b.addEventListen
   var noms=['laiton','chene','rouge','ivoire','vert','blanc'],i=Array.prototype.indexOf.call(document.querySelectorAll('.ar-ral button'),b),v=document.querySelector('.ar-fen-video');
   if(v&&noms[i]){v.setAttribute('poster','assets/media/fenetre-alu-'+noms[i]+'.jpg');v.setAttribute('src','assets/media/fenetre-alu-'+noms[i]+'.mp4');var p=v.play();if(p&&p.catch)p.catch(function(){});}
 });});
+</script>
+<script>
+/* 29/10/2026 : vidéos et défilement des avis allégés — la vidéo du haut démarre après le chargement complet (l'image fixe identique s'affiche avant),
+   les autres vidéos et le bandeau d'avis ne tournent que lorsqu'ils sont à l'écran */
+(function(){
+  var reduit=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function jouer(v){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+  var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){
+    var el=e.target;
+    if(el.tagName==='VIDEO'){ if(e.isIntersecting){ if(!el.getAttribute('src')&&el.dataset.src&&el.dataset.pret)el.setAttribute('src',el.dataset.src); if(el.getAttribute('src')&&!reduit)jouer(el);} else el.pause(); }
+    else el.classList.toggle('ar-pause',!e.isIntersecting);
+  });},{rootMargin:'100px'}):null;
+  document.querySelectorAll('.ar-marquee').forEach(function(m){m.classList.add('ar-pause');if(io)io.observe(m);else m.classList.remove('ar-pause');});
+  document.querySelectorAll('video[data-auto]').forEach(function(v){if(io)io.observe(v);else jouer(v);});
+  var h=document.querySelector('.ar-hero video[data-src]');
+  if(h&&!reduit){window.addEventListener('load',function(){setTimeout(function(){
+    h.dataset.pret='1';h.setAttribute('src',h.dataset.src);
+    h.addEventListener('playing',function(){h.classList.add('ar-joue');},{once:true});
+    if(io)io.observe(h);else jouer(h);
+  },1500);});}
+})();
 </script>
 </body>
 </html>
