@@ -58,8 +58,9 @@ const counterObserver = new IntersectionObserver((entries) => {
 counters.forEach(c => counterObserver.observe(c));
 
 // ACTIVE NAV LINK
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const norm = p => (p || '').replace(/^(\.\.\/)+/, '').replace(/^\//, '').replace(/(^|\/)index\.html$/, '$1').replace(/\.html$/, '').replace(/\/$/, '');
+const currentPage = norm(window.location.pathname);
 document.querySelectorAll('.nav__link').forEach(link => {
-  const href = link.getAttribute('href');
-  link.classList.toggle('active', href === currentPage || (currentPage === '' && href === 'index.html'));
+  const href = norm(link.getAttribute('href'));
+  link.classList.toggle('active', href === currentPage || (href === 'blog' && currentPage.startsWith('blog')));
 });

@@ -144,7 +144,7 @@ INSTRUCTIONS STRICTES :
    - 2 à 3 paragraphes intro
    - 3 à 5 sections H2 avec sous-sections H3
    - 1 tableau HTML (<table>) avec des prix indicatifs réalistes (fourchettes)
-   - 2 blocs <div class="highlight"> avec contenu utile et 1 lien <a href="../contact.html" style="color:var(--red);font-weight:700">→ Demander un devis</a>
+   - 2 blocs <div class="highlight"> avec contenu utile et 1 lien <a href="/contact" style="color:var(--red);font-weight:700">→ Demander un devis</a>
    - Mentions naturelles de : Lorient, Morbihan, Bretagne, Finistère, A2T Distributions
    - 700-900 mots de contenu réel
 
@@ -176,6 +176,20 @@ INSTRUCTIONS STRICTES :
     article_content = _re.sub(r'\s*</article>\s*$', '', article_content)
     article_content = article_content.strip()
 
+    # Titre court (Google coupe vers 60-65 caractères) et description tirée de l'introduction
+    titre_balise = titre if len(titre) > 45 else f"{titre} | A2T Distributions"
+    _intro = ""
+    for _p in _re.findall(r'<p[^>]*>(.*?)</p>', article_content, _re.S):
+        _t = _re.sub(r'\s+', ' ', _re.sub(r'<[^>]+>', '', _p)).strip()
+        if len(_t) > 80 and 'min de lecture' not in _t:
+            _intro = _t
+            break
+    if len(_intro) > 155:
+        _intro = _intro[:152]
+        _intro = _intro[:_intro.rfind(' ')].rstrip(',;:—-') + '…'
+    description = (_intro or f"{titre} : conseils, prix et aides en Bretagne par A2T Distributions.").replace('"', '&quot;')
+    description_json = description.replace('&quot;', '\\"')
+
     # Wrap dans le template complet
     html = f"""<!DOCTYPE html>
 <html lang="fr">
@@ -187,9 +201,9 @@ INSTRUCTIONS STRICTES :
   <meta property="og:image" content="https://www.a2tdistributions.fr/assets/images/{image_hero}">
   <meta name="twitter:image" content="https://www.a2tdistributions.fr/assets/images/{image_hero}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{titre} | A2T Distributions Bretagne</title>
-  <meta name="description" content="{titre} — Guide complet par A2T Distributions, spécialiste menuiseries en Bretagne et Morbihan.">
-  <link rel="canonical" href="https://www.a2tdistributions.fr/blog/{slug}.html">
+  <title>{titre_balise}</title>
+  <meta name="description" content="{description}">
+  <link rel="canonical" href="https://www.a2tdistributions.fr/blog/{slug}">
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
@@ -198,29 +212,33 @@ INSTRUCTIONS STRICTES :
     "author": {{"@type": "Organization", "name": "A2T Distributions"}},
     "publisher": {{"@type": "Organization", "name": "A2T Distributions"}},
     "datePublished": "{datetime.now().strftime('%Y-%m-%d')}",
-    "description": "{titre} — Guide complet A2T Distributions Bretagne."
+    "description": "{description_json}"
   }}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/blog.css">
   <link rel="stylesheet" href="../css/ardoise.css">
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap" rel="stylesheet"></noscript>
 </head>
 <body>
 
   <nav class="nav scrolled" id="nav">
     <div class="container nav__inner">
-      <a href="../index.html" class="nav__logo">
+      <a href="/" class="nav__logo" aria-label="A2T Distributions, accueil">
         <span class="nav__logo-a">A2T</span><span class="nav__logo-t">Distributions</span>
       </a>
       <ul class="nav__links" id="navLinks">
-        <li><a href="../index.html" class="nav__link">Accueil</a></li>
-        <li><a href="../services.html" class="nav__link">Services</a></li>
-        <li><a href="../about.html" class="nav__link">À propos</a></li>
-        <li><a href="index.html" class="nav__link active">Blog</a></li>
-        <li><a href="../contact.html" class="nav__link nav__link--cta">Devis gratuit</a></li>
+        <li><a href="/" class="nav__link">Accueil</a></li>
+        <li><a href="/services" class="nav__link">Services</a></li>
+        <li><a href="/about" class="nav__link">À propos</a></li>
+        <li><a href="/blog/" class="nav__link active">Blog</a></li>
+        <li><a href="/contact" class="nav__link nav__link--cta">Devis gratuit</a></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -233,22 +251,27 @@ INSTRUCTIONS STRICTES :
 
       <article class="article-content">
       {article_content}
+      <div class="highlight highlight--green" id="prix-en-ligne"><strong>Prix immédiat en ligne :</strong> voyez les modèles et les prix TTC tout de suite sur notre boutique a2tdistributions.com, configurateurs sur mesure compris.<br><a href="https://a2tdistributions.com/configurateur/?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=blog-{slug}" style="font-weight:700">Tous nos configurateurs →</a></div>
       </article>
 
       <aside class="article-sidebar">
         <div class="sidebar-cta">
           <h4>Devis gratuit sous 24h</h4>
           <p>Décrivez votre projet — on vous rappelle et on se déplace en Bretagne.</p>
-          <a href="../contact.html" class="btn btn--primary btn--sm" style="width:100%;text-align:center;justify-content:center">Demander un devis →</a>
+          <a href="/contact" class="btn btn--primary btn--sm" style="width:100%;text-align:center;justify-content:center">Demander un devis →</a>
+        </div>
+        <div class="sidebar-card">
+          <h4>Prix immédiat en ligne</h4>
+          <ul><li><a href="https://a2tdistributions.com/configurateur/?utm_source=a2tdistributions.fr&amp;utm_medium=vitrine&amp;utm_campaign=blog-{slug}" target="_blank" rel="noopener">Tous nos configurateurs →</a></li></ul>
         </div>
         <div class="sidebar-card">
           <h4>Nos services</h4>
           <ul>
-            <li><a href="../services.html#portes-garage">Portes de garage</a></li>
-            <li><a href="../services.html#portes-entree">Portes d'entrée</a></li>
-            <li><a href="../services.html#fenetres">Fenêtres & Baies</a></li>
-            <li><a href="../services.html#solaire">Panneaux solaires</a></li>
-            <li><a href="../services.html#bornes-ev">Bornes de recharge EV</a></li>
+            <li><a href="/services#portes-garage">Portes de garage</a></li>
+            <li><a href="/services#portes-entree">Portes d'entrée</a></li>
+            <li><a href="/services#fenetres">Fenêtres & Baies</a></li>
+            <li><a href="/services#solaire">Panneaux solaires</a></li>
+            <li><a href="/services#bornes-ev">Bornes de recharge EV</a></li>
           </ul>
         </div>
         <div class="sidebar-card">
@@ -267,7 +290,7 @@ INSTRUCTIONS STRICTES :
     <div class="container cta-section__inner reveal">
       <h2>Un projet en Bretagne ?</h2>
       <p>A2T Distributions — devis gratuit, déplacement en Morbihan et Finistère.</p>
-      <a href="../contact.html" class="btn btn--primary btn--lg">Demander mon devis gratuit →</a>
+      <a href="/contact" class="btn btn--primary btn--lg">Demander mon devis gratuit →</a>
     </div>
   </section>
 
@@ -278,10 +301,10 @@ INSTRUCTIONS STRICTES :
         <p>Spécialiste portes, fenêtres, solaire et bornes de recharge en Bretagne.</p>
         <p class="footer__siren">SIREN 853547115</p>
       </div>
-      <div class="footer__col"><h4>Navigation</h4><ul><li><a href="../index.html">Accueil</a></li><li><a href="../services.html">Services</a></li><li><a href="../about.html">À propos</a></li><li><a href="index.html">Blog</a></li><li><a href="../contact.html">Contact & Devis</a></li><li><a href="../legal.html">Mentions légales</a></li></ul></div>
-      <div class="footer__col"><h4>Blog</h4><ul><li><a href="index.html">Tous les articles</a></li><li><a href="porte-pivot-entree-prix-guide-2026.html">Porte à pivot 2026</a></li><li><a href="pergola-aluminium-bretagne-2026.html">Pergola alu</a></li><li><a href="porte-garage-lorient-2026.html">Portes de garage</a></li><li><a href="panneaux-solaires-bretagne-2026.html">Solaire Bretagne</a></li></ul></div>
+      <div class="footer__col"><h4>Navigation</h4><ul><li><a href="/">Accueil</a></li><li><a href="/services">Services</a></li><li><a href="/about">À propos</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact">Contact & Devis</a></li><li><a href="/legal">Mentions légales</a></li></ul></div>
+      <div class="footer__col"><h4>Blog</h4><ul><li><a href="/blog/">Tous les articles</a></li><li><a href="/blog/porte-pivot-entree-prix-guide-2026">Porte à pivot 2026</a></li><li><a href="/blog/pergola-aluminium-bretagne-2026">Pergola alu</a></li><li><a href="/blog/porte-garage-lorient-2026">Portes de garage</a></li><li><a href="/blog/panneaux-solaires-bretagne-2026">Solaire Bretagne</a></li></ul></div>
     </div>
-    <div class="footer__bottom"><div class="container"><p>&copy; {annee} A2T Distributions — <a href="../legal.html">Mentions légales</a> · <a href="https://whatsapp.com/channel/0029VbDlOyJ8KMqd74utzO03" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://x.com/a2tdistribution" target="_blank" rel="noopener me">X</a> · <a href="https://www.facebook.com/A2TDistri" target="_blank" rel="noopener me">Facebook</a> · <a href="https://www.instagram.com/a2tdistributions/" target="_blank" rel="noopener me">Instagram</a> · <a href="https://www.youtube.com/channel/UCicu1rGeAhrWxptAFmG3gWg" target="_blank" rel="noopener me">YouTube</a> · <a href="https://www.tiktok.com/@a2t.distributions" target="_blank" rel="noopener me">TikTok</a> · <a href="https://www.linkedin.com/in/thierry-dongus-801a032ab" target="_blank" rel="noopener me">LinkedIn</a></p></div></div>
+    <div class="footer__bottom"><div class="container"><p>&copy; {annee} A2T Distributions — <a href="/legal">Mentions légales</a> · <a href="https://whatsapp.com/channel/0029VbDlOyJ8KMqd74utzO03" target="_blank" rel="noopener">WhatsApp</a> · <a href="https://x.com/a2tdistribution" target="_blank" rel="noopener me">X</a> · <a href="https://www.facebook.com/A2TDistri" target="_blank" rel="noopener me">Facebook</a> · <a href="https://www.instagram.com/a2tdistributions/" target="_blank" rel="noopener me">Instagram</a> · <a href="https://www.youtube.com/channel/UCicu1rGeAhrWxptAFmG3gWg" target="_blank" rel="noopener me">YouTube</a> · <a href="https://www.tiktok.com/@a2t.distributions" target="_blank" rel="noopener me">TikTok</a> · <a href="https://www.linkedin.com/in/thierry-dongus-801a032ab" target="_blank" rel="noopener me">LinkedIn</a></p></div></div>
   </footer>
 
   <script src="../js/main.js"></script>
@@ -300,12 +323,12 @@ def update_blog_index(titre, slug, categorie, mois_fr, annee, image_hero):
     cat_class = ' blog-card__cat--green' if categorie in GREEN_CATEGORIES else ""
     new_card = f"""
         <article class="blog-card reveal">
-          <a href="{slug}.html">
+          <a href="/blog/{slug}">
             <div class="blog-card__img" style="background-image:url('../assets/images/{image_hero}')"></div>
           </a>
           <div class="blog-card__body">
             <span class="blog-card__cat{cat_class}">{categorie}</span>
-            <h2><a href="{slug}.html">{titre}</a></h2>
+            <h2><a href="/blog/{slug}">{titre}</a></h2>
             <p>Découvrez notre guide complet sur ce sujet clé pour votre habitat en Bretagne.</p>
             <div class="blog-card__footer">
               <span>A2T Distributions</span>
@@ -348,6 +371,8 @@ def main():
     print(f"Fichier créé : {filepath}")
 
     update_blog_index(titre, slug, categorie, mois_fr, annee, image_hero)
+    import subprocess, sys
+    subprocess.run([sys.executable, ".github/scripts/sitemap.py"], check=False)
     print(f"✅ Article '{titre}' prêt pour commit.")
 
 

@@ -34,6 +34,6 @@ jobs:
         run: |
           git config user.name "A2T Blog Bot"
           git config user.email "contact@a2tdistributions.fr"
-          git add blog/ assets/
+          git add blog/ assets/ sitemap.xml
           git diff --staged --quiet || git commit -m "Blog auto $(date '+%d %B %Y') — article hebdomadaire A2T"
           git push

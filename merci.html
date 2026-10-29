@@ -9,10 +9,14 @@
   <title>Merci pour votre message | A2T Distributions</title>
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/ardoise.css">
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Schibsted+Grotesk:wght@800&display=swap" rel="stylesheet"></noscript>
   <meta property="og:image" content="https://www.a2tdistributions.fr/assets/images/devanture-a2t-distributions-cleguer.jpg">
   <meta name="twitter:image" content="https://www.a2tdistributions.fr/assets/images/devanture-a2t-distributions-cleguer.jpg">
 </head>
@@ -20,14 +24,14 @@
 
   <nav class="nav scrolled" id="nav">
     <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">
+      <a href="/" class="nav__logo" aria-label="A2T Distributions, accueil">
         <span class="nav__logo-a">A2T</span><span class="nav__logo-t">Distributions</span>
       </a>
       <ul class="nav__links" id="navLinks">
-        <li><a href="index.html" class="nav__link">Accueil</a></li>
-        <li><a href="services.html" class="nav__link">Services</a></li>
-        <li><a href="about.html" class="nav__link">À propos</a></li>
-        <li><a href="contact.html" class="nav__link nav__link--cta">Devis gratuit</a></li>
+        <li><a href="/" class="nav__link">Accueil</a></li>
+        <li><a href="/services" class="nav__link">Services</a></li>
+        <li><a href="/about" class="nav__link">À propos</a></li>
+        <li><a href="/contact" class="nav__link nav__link--cta">Devis gratuit</a></li>
       </ul>
       <button class="nav__burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -41,8 +45,8 @@
         Merci pour votre demande. Thierry vous répond <strong style="color:#ffffff">sous 24h</strong> avec une proposition personnalisée.
       </p>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="index.html" class="btn btn--primary">Retour à l'accueil</a>
-        <a href="services.html" class="btn btn--outline">Voir nos services</a>
+        <a href="/" class="btn btn--primary">Retour à l'accueil</a>
+        <a href="/services" class="btn btn--outline">Voir nos services</a>
       </div>
     </div>
   </section>
