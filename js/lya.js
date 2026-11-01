@@ -10,6 +10,9 @@
   var PHONE = '02 97 32 76 11';
   var WELCOME = 'Bonjour, je suis Lya. Je vous aide à trouver le bon produit, à comprendre une cote ou à suivre une commande. Que cherchez-vous ?';
   var KEY = 'a2t-lya-fr';
+  // aussi chargée par ouverture-france.fr (script dans le bloc « Nos partenaires » de FD Manager)
+  var SITE = location.hostname.replace(/^www\./, '');
+  var CONTACT = /ouverture-france/.test(SITE) ? '/contactez-votre-expert-menuiserie-cleguer.html' : '/contact';
   var pageSlug = (location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '').replace(/\//g, '-')) || 'accueil';
 
   var css = ''
@@ -69,7 +72,7 @@
     + '<form class="lya__form"><label class="lya__lbl" for="lya-in" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Votre question</label>'
     + '<input class="lya__in" id="lya-in" type="text" maxlength="500" autocomplete="off" placeholder="Votre question…">'
     + '<button class="lya__send" type="submit">Envoyer</button></form>'
-    + '<div class="lya__foot">Un humain ? <a href="tel:+33297327611">' + PHONE + '</a> · <a href="/contact">Nous écrire</a></div>'
+    + '<div class="lya__foot">Un humain ? <a href="tel:+33297327611">' + PHONE + '</a> · <a href="' + CONTACT + '">Nous écrire</a></div>'
     + '</section>';
   document.body.appendChild(root);
 
@@ -93,7 +96,7 @@
       var u = new URL(url);
       if (!/(^|\.)a2tdistributions\.com$/.test(u.hostname)) return null;
       // ajout à la main : URLSearchParams changerait « ?drutex » en « ?drutex= » (lu par les configurateurs)
-      var utm = 'utm_source=a2tdistributions.fr&utm_medium=lya&utm_campaign=chat-' + encodeURIComponent(pageSlug);
+      var utm = 'utm_source=' + encodeURIComponent(/a2tdistributions-vitrine|^localhost/.test(SITE) ? 'a2tdistributions.fr' : SITE) + '&utm_medium=lya&utm_campaign=chat-' + encodeURIComponent(pageSlug);
       var base = url.split('#')[0];
       return base + (base.indexOf('?') === -1 ? '?' : '&') + utm;
     } catch (e) { return null; }
