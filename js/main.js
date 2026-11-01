@@ -64,3 +64,12 @@ document.querySelectorAll('.nav__link').forEach(link => {
   const href = norm(link.getAttribute('href'));
   link.classList.toggle('active', href === currentPage || (href === 'blog' && currentPage.startsWith('blog')));
 });
+
+// LYA (assistante du .com) : chargée 1,5 s après l'affichage, pour ne pas ralentir la page
+(function () {
+  const src = ((document.currentScript && document.currentScript.src) || '').replace(/main\.js(\?.*)?$/, 'lya.js');
+  if (!src) return;
+  const go = () => { const s = document.createElement('script'); s.src = src; s.defer = true; document.body.appendChild(s); };
+  if (document.readyState === 'complete') setTimeout(go, 1500);
+  else window.addEventListener('load', () => setTimeout(go, 1500));
+})();

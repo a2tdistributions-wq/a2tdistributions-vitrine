@@ -1,0 +1,218 @@
+/* A2T Distributions — Lya, l'assistante du .com, sur le site vitrine.
+   Chargée par main.js après l'affichage de la page. Les réponses viennent du même moteur que
+   la bulle de a2tdistributions.com (point d'accès lya-fr.php, réservé au .fr). Les liens vers
+   le .com reçoivent les UTM du .fr (règle : le .fr renvoie vers le .com, sans contenu dupliqué). */
+(function () {
+  if (window.__a2tLya) return;
+  window.__a2tLya = true;
+
+  var API = 'https://a2tdistributions.com/lya-fr.php';
+  var PHONE = '02 97 32 76 11';
+  var WELCOME = 'Bonjour, je suis Lya. Je vous aide à trouver le bon produit, à comprendre une cote ou à suivre une commande. Que cherchez-vous ?';
+  var KEY = 'a2t-lya-fr';
+  var pageSlug = (location.pathname.replace(/^\/|\/$/g, '').replace(/\.html$/, '').replace(/\//g, '-')) || 'accueil';
+
+  var css = ''
+    + '.lya{--lya-red:#c10f17;--lya-dark:#1d2227;--lya-bg:#fff;--lya-soft:#f3f1ee;--lya-text:#1d2227;--lya-mute:#5d6166;'
+    + 'position:fixed;right:16px;bottom:16px;z-index:2000;font-family:inherit;font-size:15px;line-height:1.45;color:var(--lya-text)}'
+    + '.lya *{box-sizing:border-box}'
+    + '.lya__btn{display:flex;align-items:center;gap:8px;border:0;border-radius:999px;background:var(--lya-red);color:#fff;'
+    + 'padding:8px 16px 8px 8px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(193,15,23,.32)}'
+    + '.lya__btn:focus-visible,.lya__send:focus-visible,.lya__close:focus-visible{outline:3px solid #ffd27a;outline-offset:2px}'
+    + '.lya__ico{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center}'
+    + '.lya__ico svg{width:18px;height:18px}'
+    + '.lya__panel{position:absolute;right:0;bottom:0;width:370px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 32px);'
+    + 'background:var(--lya-bg);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);display:flex;flex-direction:column;overflow:hidden}'
+    + '.lya__panel[hidden]{display:none}'
+    + '.lya__head{background:var(--lya-dark);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}'
+    + '.lya__head .lya__ico{background:var(--lya-red)}'
+    + '.lya__head strong{display:block;font-size:15px}.lya__head small{display:block;opacity:.75;font-size:12px}'
+    + '.lya__close{margin-left:auto;border:0;background:transparent;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:0 4px}'
+    + '.lya__msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--lya-soft)}'
+    + '.lya__m{max-width:88%;padding:9px 12px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}'
+    + '.lya__m--bot{background:#fff;border:1px solid #e4e0da;align-self:flex-start;border-bottom-left-radius:4px}'
+    + '.lya__m--me{background:var(--lya-red);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}'
+    + '.lya__m a{color:var(--lya-red);font-weight:600}'
+    + '.lya__m--wait{color:var(--lya-mute);font-style:italic}'
+    + '.lya__sugg{display:flex;flex-direction:column;gap:6px;align-self:stretch}'
+    + '.lya__card{display:block;background:#fff;border:1px solid #e4e0da;border-left:3px solid var(--lya-red);border-radius:8px;'
+    + 'padding:8px 10px;color:var(--lya-text);text-decoration:none;font-size:14px}'
+    + '.lya__card span{display:block;color:var(--lya-red);font-weight:600;font-size:13px;margin-top:2px}'
+    + '.lya__form{display:flex;gap:8px;padding:10px;border-top:1px solid #e4e0da;background:#fff}'
+    + '.lya__in{flex:1;min-width:0;border:1px solid #cfcac3;border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;color:var(--lya-text)}'
+    + '.lya__send{border:0;border-radius:10px;background:var(--lya-red);color:#fff;font:inherit;font-weight:600;padding:0 14px;cursor:pointer}'
+    + '.lya__send:disabled{opacity:.5;cursor:default}'
+    + '.lya__foot{padding:6px 12px 10px;background:#fff;font-size:12px;color:var(--lya-mute);text-align:center}'
+    + '.lya__foot a{color:var(--lya-mute)}'
+    + '@media (max-width:640px){.lya{right:12px;bottom:12px}.lya__btn{padding:10px;width:52px;height:52px;justify-content:center}'
+    + '.lya__btn .lya__lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.lya__btn .lya__ico{background:none}'
+    + '.lya--open .lya__btn{display:none}.lya__panel{position:fixed;right:8px;left:8px;bottom:8px;width:auto;max-width:none;height:min(560px,calc(100vh - 16px))}}'
+    + '@media print{.lya{display:none}}';
+
+  var bubble = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    + '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>';
+
+  var style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  var root = document.createElement('div');
+  root.className = 'lya';
+  root.innerHTML = ''
+    + '<button class="lya__btn" type="button" aria-expanded="false" aria-controls="lya-panel">'
+    + '<span class="lya__ico">' + bubble + '</span><span class="lya__lbl">Une question ? Lya</span></button>'
+    + '<section class="lya__panel" id="lya-panel" role="dialog" aria-label="Lya, assistante A2T Distributions" hidden>'
+    + '<header class="lya__head"><span class="lya__ico">' + bubble + '</span>'
+    + '<div><strong>Lya, assistante A2T Distributions</strong><small>Réponse immédiate, 7 j/7</small></div>'
+    + '<button class="lya__close" type="button" aria-label="Fermer">×</button></header>'
+    + '<div class="lya__msgs" aria-live="polite"></div>'
+    + '<form class="lya__form"><label class="lya__lbl" for="lya-in" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Votre question</label>'
+    + '<input class="lya__in" id="lya-in" type="text" maxlength="500" autocomplete="off" placeholder="Votre question…">'
+    + '<button class="lya__send" type="submit">Envoyer</button></form>'
+    + '<div class="lya__foot">Un humain ? <a href="tel:+33297327611">' + PHONE + '</a> · <a href="/contact">Nous écrire</a></div>'
+    + '</section>';
+  document.body.appendChild(root);
+
+  var btn = root.querySelector('.lya__btn');
+  var panel = root.querySelector('.lya__panel');
+  var msgs = root.querySelector('.lya__msgs');
+  var form = root.querySelector('.lya__form');
+  var input = root.querySelector('.lya__in');
+  var send = root.querySelector('.lya__send');
+  var history = [];
+
+  function load() {
+    try { history = JSON.parse(sessionStorage.getItem(KEY) || '[]') || []; } catch (e) { history = []; }
+  }
+  function save() {
+    try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-30))); } catch (e) { /* stockage indisponible */ }
+  }
+
+  function withUtm(url) {
+    try {
+      var u = new URL(url);
+      if (!/(^|\.)a2tdistributions\.com$/.test(u.hostname)) return null;
+      u.searchParams.set('utm_source', 'a2tdistributions.fr');
+      u.searchParams.set('utm_medium', 'lya');
+      u.searchParams.set('utm_campaign', 'chat-' + pageSlug);
+      return u.toString();
+    } catch (e) { return null; }
+  }
+
+  function shortLabel(url) {
+    try {
+      var u = new URL(url);
+      var path = decodeURIComponent(u.pathname).replace(/\/$/, '');
+      var label = u.hostname.replace(/^www\./, '') + (path || '') + (u.search && /configurateur/.test(path) ? u.search : '');
+      return label.length > 48 ? label.slice(0, 46) + '…' : label;
+    } catch (e) { return url; }
+  }
+
+  function fillText(node, text) {
+    var parts = String(text || '').split(/(https?:\/\/[^\s]+)/g);
+    parts.forEach(function (part) {
+      if (!part) return;
+      if (/^https?:\/\//.test(part)) {
+        var href = withUtm(part);
+        if (href) {
+          var a = document.createElement('a');
+          a.href = href;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = shortLabel(part);
+          node.appendChild(a);
+          return;
+        }
+      }
+      node.appendChild(document.createTextNode(part));
+    });
+  }
+
+  function addMsg(role, text, suggestions) {
+    var m = document.createElement('div');
+    m.className = 'lya__m lya__m--' + (role === 'me' ? 'me' : 'bot');
+    if (role === 'me') m.textContent = text; else fillText(m, text);
+    msgs.appendChild(m);
+    if (suggestions && suggestions.length) {
+      var box = document.createElement('div');
+      box.className = 'lya__sugg';
+      suggestions.slice(0, 3).forEach(function (s) {
+        var href = withUtm(s.url);
+        if (!href) return;
+        var a = document.createElement('a');
+        a.className = 'lya__card';
+        a.href = href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = s.title;
+        var go = document.createElement('span');
+        go.textContent = 'Voir le produit →';
+        a.appendChild(go);
+        box.appendChild(a);
+      });
+      if (box.childNodes.length) msgs.appendChild(box);
+    }
+    msgs.scrollTop = msgs.scrollHeight;
+    return m;
+  }
+
+  function render() {
+    msgs.textContent = '';
+    addMsg('bot', WELCOME);
+    history.forEach(function (h) { addMsg(h.r, h.t, h.s); });
+  }
+
+  function open(state) {
+    panel.hidden = !state;
+    root.classList.toggle('lya--open', state);
+    btn.setAttribute('aria-expanded', state ? 'true' : 'false');
+    if (state) {
+      if (!msgs.childNodes.length) render();
+      setTimeout(function () { input.focus(); }, 50);
+    } else {
+      btn.focus();
+    }
+  }
+
+  btn.addEventListener('click', function () { open(true); });
+  root.querySelector('.lya__close').addEventListener('click', function () { open(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) open(false); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var q = input.value.trim();
+    if (!q || send.disabled) return;
+    input.value = '';
+    addMsg('me', q);
+    history.push({ r: 'me', t: q });
+    save();
+    send.disabled = true;
+    var wait = addMsg('bot', 'Lya écrit…');
+    wait.classList.add('lya__m--wait');
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: q,
+        page_title: document.title,
+        device_type: window.matchMedia('(max-width: 640px)').matches ? 'mobile' : 'desktop',
+        user_lang: navigator.language || 'fr'
+      })
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      wait.remove();
+      var t = (j && j.answer) || 'Désolée, je n’ai pas pu répondre. Appelez-nous au ' + PHONE + '.';
+      var s = (j && j.suggestions) || [];
+      addMsg('bot', t, s);
+      history.push({ r: 'bot', t: t, s: s });
+      save();
+    }).catch(function () {
+      wait.remove();
+      addMsg('bot', 'La connexion a échoué. Réessayez, ou appelez-nous au ' + PHONE + '.');
+    }).then(function () {
+      send.disabled = false;
+      input.focus();
+    });
+  });
+
+  load();
+})();
