@@ -171,7 +171,7 @@
         a.rel = 'noopener';
         a.textContent = s.title;
         var go = document.createElement('span');
-        go.textContent = 'Voir le produit →';
+        go.textContent = (s.label || 'Voir le produit') + ' →';
         a.appendChild(go);
         box.appendChild(a);
       });
