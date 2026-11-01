@@ -203,6 +203,37 @@
   root.querySelector('.lya__close').addEventListener('click', function () { open(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) open(false); });
 
+  // A2T 01/11/2026 (Thierry) : au bout de 15 s sur une page, petite bulle d'invitation à côté du bouton de Lya,
+  // une seule fois par visite ; jamais si la fenêtre est déjà ouverte ; disparaît seule (8 s sur smartphone, 20 s sinon)
+  function a2tInviteLya(btnEl, estOuvert, ouvrir) {
+    var CLE = 'a2t-lya-invite';
+    try { if (sessionStorage.getItem(CLE)) return; } catch (e) { return; }
+    if (/^(checkout|cart|order-confirmation|authentication|password)$/.test(document.body.id || '')) return;
+    var t = 0;
+    var iv = setInterval(function () {
+      if (document.hidden) return;
+      if (estOuvert()) { clearInterval(iv); return; }
+      t += 1000;
+      if (t < 15000) return;
+      clearInterval(iv);
+      try { sessionStorage.setItem(CLE, '1'); } catch (e) {}
+      var r = btnEl.getBoundingClientRect();
+      if (!r.width) return;
+      var b = document.createElement('div');
+      b.setAttribute('role', 'status');
+      b.style.cssText = 'position:fixed;z-index:10060;max-width:min(270px,calc(100vw - 32px));right:' + Math.max(8, Math.round(window.innerWidth - r.right)) + 'px;bottom:' + Math.round(window.innerHeight - r.top + 10) + 'px;display:flex;align-items:flex-start;gap:6px;background:#fff;color:#1d2227;border:1px solid #e0dcd5;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:10px 8px 10px 12px;font:14px/1.4 inherit;font-family:inherit';
+      b.innerHTML = '<button type="button" style="all:unset;cursor:pointer;flex:1"><strong style="display:block;color:#c10f17">Bonjour, je suis Lya</strong>Je vous aide à trouver le bon produit ou le prix ?</button>'
+        + '<button type="button" aria-label="Fermer" style="all:unset;cursor:pointer;color:#80858a;font-size:20px;line-height:1;padding:0 4px">×</button>';
+      document.body.appendChild(b);
+      var fin = function () { if (b.parentNode) b.parentNode.removeChild(b); };
+      b.firstChild.addEventListener('click', function () { fin(); ouvrir(); });
+      b.lastChild.addEventListener('click', fin);
+      btnEl.addEventListener('click', fin);
+      setTimeout(fin, window.matchMedia('(max-width:640px)').matches ? 8000 : 20000);
+    }, 1000);
+  }
+  a2tInviteLya(btn, function () { return !panel.hidden; }, function () { open(true); });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var q = input.value.trim();
