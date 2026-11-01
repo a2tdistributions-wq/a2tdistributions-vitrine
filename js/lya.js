@@ -92,10 +92,10 @@
     try {
       var u = new URL(url);
       if (!/(^|\.)a2tdistributions\.com$/.test(u.hostname)) return null;
-      u.searchParams.set('utm_source', 'a2tdistributions.fr');
-      u.searchParams.set('utm_medium', 'lya');
-      u.searchParams.set('utm_campaign', 'chat-' + pageSlug);
-      return u.toString();
+      // ajout à la main : URLSearchParams changerait « ?drutex » en « ?drutex= » (lu par les configurateurs)
+      var utm = 'utm_source=a2tdistributions.fr&utm_medium=lya&utm_campaign=chat-' + encodeURIComponent(pageSlug);
+      var base = url.split('#')[0];
+      return base + (base.indexOf('?') === -1 ? '?' : '&') + utm;
     } catch (e) { return null; }
   }
 
