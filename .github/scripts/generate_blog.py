@@ -46,10 +46,8 @@ CATEGORY_IMAGES = {
         "baies-vitrees-noires-briques-terreal.jpg",
     ],
     "Menuiseries": [
-        "batiment-a2t-distributions-exterieur.jpg", "devanture-a2t-distributions-cleguer.jpg",
-        "depot-a2t-distributions-facade-cleguer.jpg", "porte-aluminium-batiment-pierre-bretagne.jpg",
-        "camionnette-livraison-porte-a2t.jpg", "realisation-porte-bois-fenetres-noires.jpg",
-        "pergola-aluminium-bioclimatique-bretagne.jpg",
+        "porte-aluminium-batiment-pierre-bretagne.jpg", "realisation-porte-bois-fenetres-noires.jpg",
+        "fenetres-alu-chantier-hennebont.jpg", "baies-vitrees-noires-briques-terreal.jpg",
     ],
     "Conseils": [
         "showroom-a2t-catalogues-tehni-pirnar.jpg", "showroom-a2t-pirnar-eclaire.jpg",
@@ -62,9 +60,31 @@ CATEGORY_IMAGES = {
         "borne-recharge-v2c-installation-garage.jpg", "borne-recharge-v2c-wallbox-bretagne.jpg",
     ],
     "Panneaux habitat": [
-        "chantier-complet-maison-bretagne.jpg", "batiment-a2t-distributions-exterieur.jpg",
+        "chantier-complet-maison-bretagne.jpg", "chantier-maison-contemporaine-a2t.jpg",
     ],
 }
+
+# 07/11/2026 : image choisie d'abord d'après les mots du titre (sinon la catégorie),
+# pour ne plus illustrer un article « volet » par la photo du bâtiment ou d'une pergola.
+KEYWORD_IMAGES = [
+    (("volet battant", "volets battants", "persienne"), ["volet-battant-dessin-a2t.jpg"]),
+    (("volet roulant", "volets roulants", "bso", "brise-soleil"), ["volet-roulant-dessin-a2t.jpg"]),
+    (("véranda", "veranda"), ["veranda-alu-dessin-a2t.jpg"]),
+    (("fenêtre de toit", "fenetre de toit", "lucarne", "velux", "toiture"), ["fenetre-de-toit-dessin-a2t.jpg"]),
+    (("pergola",), ["pergola-aluminium-bioclimatique-bretagne.jpg"]),
+    (("pivot",), ["porte-pivot-tehni-larmor-plage.jpg", "porte-pivot-bois-a2t-morbihan.jpg", "pose-porte-pivot-equipe-a2t.jpg"]),
+    (("baie", "coulissant"), ["baies-vitrees-noires-briques-terreal.jpg", "fenetres-alu-chantier-hennebont.jpg"]),
+    (("borne", "recharge", "irve"), ["borne-recharge-v2c-installation-garage.jpg", "borne-recharge-v2c-wallbox-bretagne.jpg"]),
+    (("solaire", "photovolta"), ["panneaux-solaires-toit-ardoise-bretagne.jpg"]),
+]
+
+
+def choose_image(titre, categorie):
+    t = titre.lower()
+    for mots, images in KEYWORD_IMAGES:
+        if any(m in t for m in mots):
+            return random.choice(images)
+    return random.choice(CATEGORY_IMAGES.get(categorie, CATEGORY_IMAGES["Conseils"]))
 
 SYSTEM_PROMPT = """Tu es un rédacteur SEO expert en menuiseries, habitat et énergie en Bretagne,
 travaillant pour A2T Distributions (Cléguér, Morbihan). Tu rédiges des articles de blog HTML
@@ -358,8 +378,7 @@ def main():
     if slug in used_slugs:
         slug = f"{slug}-{now.strftime('%Y%m%d')}"
 
-    images = CATEGORY_IMAGES.get(categorie, CATEGORY_IMAGES["Conseils"])
-    image_hero = random.choice(images)
+    image_hero = choose_image(titre, categorie)
 
     print(f"Sujet choisi : {titre} ({categorie})")
 
