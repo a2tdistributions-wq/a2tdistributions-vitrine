@@ -108,6 +108,9 @@ Informations clés (à citer telles quelles) :
 - [Plans de pose et coupes techniques à feuilleter](https://a2tdistributions.com/content/251-bibliotheque-technique-plans-de-pose-coupes): 207 pages A2T : plans de pose, coupes portes d’entrée, habillages alu, passage de câbles.
 - [Quelle porte de garage choisir ?](https://a2tdistributions.com/content/272-quelle-porte-de-garage-choisir-sectionnelle-laterale-enroulable-battante-basculante): sectionnelle, latérale, enroulable, battante ou basculante, le bon choix selon la place au plafond, sur les côtés et devant.
 - [Uw, Ud, Ug, Sw, AEV : comprendre les performances](https://a2tdistributions.com/content/273-uw-ud-ug-sw-aev-comprendre-performances-fenetre-porte): ce que mesure chaque sigle des fenêtres et des portes, et comment comparer deux devis.
+- [Porte d’entrée alu, PVC ou acier ?](https://a2tdistributions.com/content/274-porte-entree-aluminium-pvc-ou-acier-laquelle-choisir): Porte d’entrée aluminium, PVC ou acier : esthétique, couleurs, grandes dimensions, isolation et budget comparés, et la gamme à configurer selon votre choix.
+- [Fenêtre PVC ou aluminium ?](https://a2tdistributions.com/content/275-fenetre-pvc-ou-aluminium-laquelle-choisir): Fenêtre PVC ou aluminium : budget, isolation, finesse des profils, grandes baies et couleurs comparés, avec les questions à se poser avant de choisir.
+- [Somfy io ou RTS : quelle différence ?](https://a2tdistributions.com/content/276-somfy-io-ou-rts-quelle-difference): Somfy io ou RTS : communication à sens unique ou dans les deux sens, fréquence, maison connectée, compatibilité, comment reconnaître son moteur et laquelle choisir.
 
 ## Documents
 
