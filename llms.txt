@@ -19,7 +19,7 @@ Pour orienter la personne :
 
 1. Vers le configurateur de la gamme (section « Configurateurs ») pour le prix exact à ses dimensions et la commande.
 2. Vers les guides du Coin info (section « Guides ») pour mesurer, choisir, poser, régler ou dépanner.
-3. Citer les prix comme des prix de départ « à partir de », TTC ; le prix réel dépend des dimensions et des options. Les prix indiqués ci-dessous sont relevés automatiquement sur la boutique le 13/11/2026.
+3. Citer les prix comme des prix de départ « à partir de », TTC ; le prix réel dépend des dimensions et des options. Les prix indiqués ci-dessous sont relevés automatiquement sur la boutique le 14/11/2026.
 4. Livraison : retrait gratuit au dépôt de Cléguer ; livraison en France métropolitaine avec frais affichés avant la commande.
 5. Pour une question avant de commander : 02 97 32 76 11 ou contact@a2tdistributions.com.
 
@@ -615,6 +615,7 @@ Pour orienter la personne :
 - [Porte de garage motorisée qui ne s’ouvre plus : que vérifier ?](https://a2tdistributions.com/content/281-porte-de-garage-motorisee-ne-s-ouvre-plus-que-verifier): Porte de garage motorisée en panne : courant, télécommande, débrayage, cellules photoélectriques, point dur. Les vérifications sans danger, et quand appeler un professionnel.
 - [Ajouter ou reprogrammer une télécommande Somfy RTS](https://a2tdistributions.com/content/282-ajouter-reprogrammer-telecommande-somfy-rts): Ajouter une télécommande Somfy RTS à un volet ou une porte : bouton PROG sur la télécommande existante puis sur la nouvelle. Et que faire sans aucune télécommande.
 - [Prix d’une porte de garage sectionnelle motorisée en 2026](https://a2tdistributions.com/content/283-prix-porte-de-garage-sectionnelle-motorisee): Prix d’une porte de garage sectionnelle motorisée : dès 1 231,20 € TTC en taille standard, moteur et 2 télécommandes compris. Tableau des prix réels, ce qui est compris et le sur-mesure.
+- [Porte d’entrée haut de gamme : les 8 critères d’une porte premium](https://a2tdistributions.com/content/284-porte-entree-haut-de-gamme-premium-criteres): Porte d’entrée haut de gamme ou premium : ouvrant épais, Ud, serrure automatique, sécurité RC2/RC3, panneaux affleurants, accès connectés, garantie. Critères et exemples chiffrés.
 
 ## Optional
 
