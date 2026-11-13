@@ -71,6 +71,9 @@ Pour orienter la personne :
 - [Fenêtres PVC sur mesure](https://a2tdistributions.com/configurateur/?pvc): 1 à 3 vantaux, porte-fenêtre, volet.
 - [Fenêtres PVC Drutex Iglo 5](https://a2tdistributions.com/configurateur/?drutex): Appui, V-Perfect, poignée compris.
 - [Fenêtres PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=of2): Fabriquées en France, bicolores, petits bois.
+- [Fenêtre PVC Maugin + volet roulant](https://a2tdistributions.com/configurateur/?mauginf=of2&vr=1): Bloc-baie Zénith intégré, moteur Somfy io.
+- [Porte de service PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=ps1): Pleine ou oculus, 1 ou 2 vantaux.
+- [Coulissant à translation PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=cou): Glisse comme un coulissant, ferme comme une frappe.
 - [Fenêtres cintrées et en forme](https://a2tdistributions.com/configurateur/?atypique): Plein cintre, surbaissé, trapèze, triangle.
 - [Œil-de-bœuf et demi-lune](https://a2tdistributions.com/configurateur/?oeil): Fixes ou ouvrants, une cote suffit.
 - [Baies coulissantes PVC-alu](https://a2tdistributions.com/configurateur/?pvcalu): Dormant PVC, ouvrants alu fins.
@@ -81,6 +84,12 @@ Pour orienter la personne :
 - [Baies à galandage](https://a2tdistributions.com/configurateur/?coulissant=g1v1r): Vantaux escamotés dans la cloison.
 - [Porte de service aluminium](https://a2tdistributions.com/configurateur/?fenetre=PS&remp=soub): Serrure 5 points, seuil PMR.
 - [Volets roulants sur mesure](https://a2tdistributions.com/configurateur/?volet): Rénovation, tunnel, demi-linteau, monobloc.
+- [Fenêtres ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=of2): Perspective ou Classique, 12 couleurs, bicolore.
+- [Portes-fenêtres ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=pf2): Seuil 20 mm, serrure à relevage, volet Zénith.
+- [Soufflets et fixes ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=fixe): Abattants, châssis fixes grandes dimensions.
+- [Baies coulissantes ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=c2): 2, 3, 4 ou 6 vantaux jusqu’à 6,40 m.
+- [Galandages ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=g2): Vantaux escamotés dans la cloison.
+- [Portes tertiaires ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=pt1): Commerce, bureau, ERP, anti-panique.
 
 ### Habitat et intérieur
 - [Portes invisibles](https://a2tdistributions.com/64-portes-invisibles): Affleurantes, assorties aux panneaux, sur commande par téléphone.
@@ -617,6 +626,7 @@ Pour orienter la personne :
 - [Prix d’une porte de garage sectionnelle motorisée en 2026](https://a2tdistributions.com/content/283-prix-porte-de-garage-sectionnelle-motorisee): Prix d’une porte de garage sectionnelle motorisée : dès 1 231,20 € TTC en taille standard, moteur et 2 télécommandes compris. Tableau des prix réels, ce qui est compris et le sur-mesure.
 - [Porte d’entrée haut de gamme : les 8 critères d’une porte premium](https://a2tdistributions.com/content/284-porte-entree-haut-de-gamme-premium-criteres): Porte d’entrée haut de gamme ou premium : ouvrant épais, Ud, serrure automatique, sécurité RC2/RC3, panneaux affleurants, accès connectés, garantie. Critères et exemples chiffrés.
 - [Porte de garage sectionnelle : fonctionnement, avantages, prix, le guide complet](https://a2tdistributions.com/content/285-porte-de-garage-sectionnelle-fonctionnement-avantages-prix-guide): Porte de garage sectionnelle : comment elle fonctionne, avantages et limites, tailles standard ou sur mesure, isolation 42 mm, motorisation, prix dès 1 231 € TTC moteur compris.
+- [Borne de recharge voiture électrique : types, puissance, installation, prix](https://a2tdistributions.com/content/286-borne-recharge-voiture-electrique-types-puissance-installation-prix): Borne de recharge pour voiture électrique : prise renforcée, wallbox 7,4 ou 22 kW, borne double ou rapide, installation IRVE, pilotage, solaire, copropriété. Prix dès 777,84 € TTC.
 
 ## Optional
 
