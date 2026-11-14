@@ -73,3 +73,36 @@ document.querySelectorAll('.nav__link').forEach(link => {
   if (document.readyState === 'complete') setTimeout(go, 1500);
   else window.addEventListener('load', () => setTimeout(go, 1500));
 })();
+
+/* 14/11/2026 : compteur de vues du blog (functions/api/vues.js).
+   Article : compte la lecture (1 fois / 12 h par visiteur) et affiche « 👁 N vues » dans la ligne d'infos.
+   Index du blog : affiche les vues sur chaque carte. Rien n'est affiché sous SEUIL vues. */
+(function () {
+  var SEUIL = 20;
+  var chemin = location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+  if (chemin.indexOf('/blog') !== 0) return;
+  function txt(n) { return '👁 ' + n.toLocaleString('fr-FR') + ' vues'; }
+  var slug = chemin.split('/')[2];
+  if (slug && slug !== 'index') {
+    var cle = 'vu:' + slug, deja = false;
+    try { deja = Date.now() - (+localStorage.getItem(cle) || 0) < 12 * 3600 * 1000; } catch (e) {}
+    fetch('/api/vues?p=' + slug, { method: deja ? 'GET' : 'POST' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        try { if (!deja) localStorage.setItem(cle, String(Date.now())); } catch (e) {}
+        var n = d[slug], meta = document.querySelector('.article-meta');
+        if (meta && n >= SEUIL) { var s = document.createElement('span'); s.textContent = txt(n); meta.appendChild(s); }
+      }).catch(function () {});
+    return;
+  }
+  var cartes = {}, liens = document.querySelectorAll('.blog-card h2 a[href^="/blog/"]');
+  for (var i = 0; i < liens.length; i++) cartes[liens[i].getAttribute('href').split('/')[2]] = liens[i];
+  var slugs = Object.keys(cartes);
+  if (!slugs.length) return;
+  fetch('/api/vues?p=' + slugs.join(',')).then(function (r) { return r.json(); }).then(function (d) {
+    slugs.forEach(function (s) {
+      var pied = cartes[s].closest('.blog-card').querySelector('.blog-card__footer span:last-child');
+      if (pied && d[s] >= SEUIL) pied.textContent += ' · ' + txt(d[s]);
+    });
+  }).catch(function () {});
+})();

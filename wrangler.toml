@@ -1,0 +1,9 @@
+# 14/11/2026 : configuration du projet Cloudflare Pages (site .fr, déployé par git push sur main).
+# VUES = compteur de vues des articles du blog (functions/api/vues.js + js/main.js).
+name = "a2tdistributions-vitrine"
+pages_build_output_dir = "."
+compatibility_date = "2026-09-17"
+
+[[kv_namespaces]]
+binding = "VUES"
+id = "2f0946b1235a4bba951a5075dc613057"
