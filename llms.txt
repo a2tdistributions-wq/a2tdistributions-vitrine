@@ -74,6 +74,7 @@ Pour orienter la personne :
 - [Fenêtre PVC Maugin + volet roulant](https://a2tdistributions.com/configurateur/?mauginf=of2&vr=1): Bloc-baie Zénith intégré, moteur Somfy io.
 - [Porte de service PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=ps1): Pleine ou oculus, 1 ou 2 vantaux.
 - [Coulissant à translation PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=cou): Glisse comme un coulissant, ferme comme une frappe.
+- [Fenêtres cintrées et en forme PVC Maugin](https://a2tdistributions.com/configurateur/?mauginforme=plein): Plein cintre, anse de panier, trapèze, œil-de-bœuf.
 - [Fenêtres cintrées et en forme](https://a2tdistributions.com/configurateur/?atypique): Plein cintre, surbaissé, trapèze, triangle.
 - [Œil-de-bœuf et demi-lune](https://a2tdistributions.com/configurateur/?oeil): Fixes ou ouvrants, une cote suffit.
 - [Baies coulissantes PVC-alu](https://a2tdistributions.com/configurateur/?pvcalu): Dormant PVC, ouvrants alu fins.
@@ -90,6 +91,7 @@ Pour orienter la personne :
 - [Baies coulissantes ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=c2): 2, 3, 4 ou 6 vantaux jusqu’à 6,40 m.
 - [Galandages ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=g2): Vantaux escamotés dans la cloison.
 - [Portes tertiaires ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=pt1): Commerce, bureau, ERP, anti-panique.
+- [Fenêtres en forme ALU Maugin](https://a2tdistributions.com/configurateur/?mauginforme=trapeze&mat=alu): Trapèze, pignon, pans coupés, triangle.
 
 ### Habitat et intérieur
 - [Portes invisibles](https://a2tdistributions.com/64-portes-invisibles): Affleurantes, assorties aux panneaux, sur commande par téléphone.
