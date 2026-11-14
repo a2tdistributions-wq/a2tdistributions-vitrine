@@ -72,6 +72,7 @@ Pour orienter la personne :
 - [Fenêtres PVC Drutex Iglo 5](https://a2tdistributions.com/configurateur/?drutex): Appui, V-Perfect, poignée compris.
 - [Fenêtres PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=of2): Fabriquées en France, bicolores, petits bois.
 - [Fenêtre PVC Maugin + volet roulant](https://a2tdistributions.com/configurateur/?mauginf=of2&vr=1): Bloc-baie Zénith intégré, moteur Somfy io.
+- [Fenêtres PVC Maugin 3 et 4 vantaux, avec fixes](https://a2tdistributions.com/configurateur/?mauginf=of3): Imposte fixe ou à soufflet, allège fixe.
 - [Porte de service PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=ps1): Pleine ou oculus, 1 ou 2 vantaux.
 - [Coulissant à translation PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=cou): Glisse comme un coulissant, ferme comme une frappe.
 - [Fenêtres cintrées et en forme PVC Maugin](https://a2tdistributions.com/configurateur/?mauginforme=plein): Plein cintre, anse de panier, trapèze, œil-de-bœuf.
