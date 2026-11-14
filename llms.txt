@@ -87,6 +87,7 @@ Pour orienter la personne :
 - [Porte de service aluminium](https://a2tdistributions.com/configurateur/?fenetre=PS&remp=soub): Serrure 5 points, seuil PMR.
 - [Volets roulants sur mesure](https://a2tdistributions.com/configurateur/?volet): Rénovation, tunnel, demi-linteau, monobloc.
 - [Fenêtres ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=of2): Perspective ou Classique, 12 couleurs, bicolore.
+- [Fenêtres ALU Maugin 3 et 4 vantaux, avec fixes](https://a2tdistributions.com/configurateur/?mauginalu=of3): Imposte fixe ou à soufflet, allège fixe.
 - [Portes-fenêtres ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=pf2): Seuil 20 mm, serrure à relevage, volet Zénith.
 - [Soufflets et fixes ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=fixe): Abattants, châssis fixes grandes dimensions.
 - [Baies coulissantes ALU Maugin](https://a2tdistributions.com/configurateur/?mauginalu=c2): 2, 3, 4 ou 6 vantaux jusqu’à 6,40 m.
