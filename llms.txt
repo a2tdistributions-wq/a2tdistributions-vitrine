@@ -74,6 +74,7 @@ Pour orienter la personne :
 - [Fenêtre PVC Maugin + volet roulant](https://a2tdistributions.com/configurateur/?mauginf=of2&vr=1): Bloc-baie Zénith intégré, moteur Somfy io.
 - [Fenêtres PVC Maugin 3 et 4 vantaux, avec fixes](https://a2tdistributions.com/configurateur/?mauginf=of3): Imposte fixe ou à soufflet, allège fixe.
 - [Portes-fenêtres Maugin 3 et 4 vantaux, avec fixes](https://a2tdistributions.com/configurateur/?mauginf=pf3): PVC ou aluminium, imposte en option.
+- [Volet roulant Maugin seul](https://a2tdistributions.com/configurateur/?mauginf=vr): Zénith 2.0 sur fenêtre ou Izibaie 2.0 dans le linteau.
 - [Châssis basculant et à l’italienne Maugin](https://a2tdistributions.com/configurateur/?mauginf=bas): PVC ou aluminium : pivot horizontal ou ouvrant projeté.
 - [Porte de service PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=ps1): Pleine ou oculus, 1 ou 2 vantaux.
 - [Coulissant à translation PVC Maugin](https://a2tdistributions.com/configurateur/?mauginf=cou): Glisse comme un coulissant, ferme comme une frappe.
