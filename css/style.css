@@ -1130,3 +1130,6 @@ ul { list-style: none; }
   .values__grid { grid-template-columns: 1fr; }
   .stats__grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* 20/11/2026 : les images ont maintenant width/height (stabilité de la mise en page) : la hauteur suit la largeur */
+:where(img[width][height]){height:auto}
