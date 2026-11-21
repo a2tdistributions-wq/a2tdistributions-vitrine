@@ -69,7 +69,11 @@ document.querySelectorAll('.nav__link').forEach(link => {
 (function () {
   const src = ((document.currentScript && document.currentScript.src) || '').replace(/main\.js(\?.*)?$/, 'lya.js');
   if (!src) return;
-  const go = () => { const s = document.createElement('script'); s.src = src; s.defer = true; document.body.appendChild(s); };
+  const go = () => {
+    const s = document.createElement('script'); s.src = src; s.defer = true; document.body.appendChild(s);
+    // 21/11/2026 : bandeau « Installer l'appli A2T » (renvoie vers l'appli du .com)
+    const a = document.createElement('script'); a.src = src.replace(/lya\.js$/, 'appli.js'); a.defer = true; document.body.appendChild(a);
+  };
   if (document.readyState === 'complete') setTimeout(go, 1500);
   else window.addEventListener('load', () => setTimeout(go, 1500));
 })();
