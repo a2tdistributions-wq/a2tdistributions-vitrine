@@ -640,7 +640,7 @@ ul { list-style: none; }
 }
 .footer__brand p { font-size: 14px; line-height: 1.7; }
 .footer__siren { font-size: 12px; margin-top: 12px; opacity: .4; }
-.footer__col h4 {
+.footer__col h4, .footer__col h3 {
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
