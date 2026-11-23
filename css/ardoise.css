@@ -235,3 +235,10 @@ h1,h2,h3,.section__title,.page-header h1{font-family:var(--ar-display);font-weig
 /* 29/10/2026 : pied de page plus lisible (contraste AA) */
 .footer__siren{opacity:1!important;color:#9ea3a6}
 .footer__bottom,.footer__bottom p{color:#9ea3a6!important}
+
+/* 23/11/2026 : zones de toucher d'au moins 44 px sur téléphone (marges négatives = même mise en page en haut) */
+@media (max-width:767px){
+  .footer__col ul li a{display:inline-block;padding:11px 0}
+  .ar-more{display:inline-block;padding:12px 0;margin:-12px 0;border-bottom:0;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .nav__burger{padding:14px;margin:-6px}
+}
